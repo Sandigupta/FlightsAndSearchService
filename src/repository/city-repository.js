@@ -1,7 +1,7 @@
 const { City } = require("../models/index");
 
 class CityRepository {
-async createCity({ name }) {
+    async createCity({ name }) {
         try {
             const city = await City.create({ name });
             return city;
@@ -9,22 +9,22 @@ async createCity({ name }) {
             console.log("Something went wrong in the repository layer");
             throw { error };
         }
-}
-
-
-async deleteCity(cityId){
-    try {
-        await City.destroy({
-            where: {
-                id: cityId
-            }
-        });
-    } catch (error) {
-        console.log("Something went wrong in the repository layer");
-        throw { error };
     }
+
+
+    async deleteCity(cityId) {
+        try {
+            await City.destroy({
+                where: {
+                    id: cityId
+                }
+            });
+        } catch (error) {
+            console.log("Something went wrong in the repository layer");
+            throw { error };
+        }
     
-}
+    }
 
     
     async updateCity(cityId, data) {
@@ -37,9 +37,9 @@ async deleteCity(cityId){
             return city;
         } catch (error) {
             console.log("Something went wrong in the repository layer");
-            throw {error};
+            throw { error };
         }
-    } 
+    }
     
     async getCity(cityId) {
         try {
@@ -50,6 +50,27 @@ async deleteCity(cityId){
             throw { error };
         }
     }
+
+    async getAllCities(filter) { // filter can be empty also
+        try {
+            if (filter.name) {
+                const cities = await City.findAll({
+                    where: {
+                        name: {
+                            [Op.startsWith]: filter.name
+                        }
+                    }
+                });
+                return cities;
+            }
+            const cities = await City.findAll();
+            return cities;
+        } catch (error) {
+            console.log("Something went wrong in the repository layer");
+            throw { error };
+        }
+    }
+
 }
 
 module.exports = CityRepository;
