@@ -1,17 +1,18 @@
 const { CityService } = require('../services/index');
 
+
 const cityService = new CityService();
 
 const create = async (req, res) => {
     try {
         const city = await cityService.createCity(req.body);
         // The 201 status code is used in HTTP responses to indicate that a resource has been successfully created on the server.
-        return res.status(201).json({ 
+        return res.status(201).json({
             data: city,
             success: true,
             message: 'Successfully created a city',
-            err:{}
-        })
+            err: {}
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({
