@@ -1,9 +1,7 @@
 const { Op } = require('sequelize');
-
 const { City } = require('../models/index');
 
 class CityRepository {
-
     async createCity({ name }) { 
         try {
             const city = await City.create({
@@ -30,7 +28,7 @@ class CityRepository {
         }
     }
 
-    async updateCity(cityId, data) { // {name: "Prayagraj"}
+    async updateCity(id, data) { // {name: "Prayagraj"}
         try {
             // The below approach also works but will not return updated object
             // if we are using Pg then returning: true can be used, else not
@@ -41,23 +39,29 @@ class CityRepository {
             //      
             // });
             // for getting updated data in mysql we use the below approach
-            const city = await City.findByPk(cityId);
+            const city = await City.findByPk(id);
+            if (!city) {
+                throw new Error('City not found');
+              }
             city.name = data.name;
             await city.save();
             return city;
         } catch (error) {
             console.log("Something went wrong in the repository layer");
-            throw {error};
+            throw error;
         }
     }
 
     async getCity(cityId) {
         try {
             const city = await City.findByPk(cityId);
+            if (!city) {
+                throw new Error('City not found');
+            }
             return city;
         } catch (error) {
             console.log("Something went wrong in the repository layer");
-            throw {error};
+            throw error;
         }
     }
 
@@ -68,8 +72,8 @@ class CityRepository {
                     where: {
                         name: {
                             [Op.startsWith]: filter.name
-                        }
-                    }
+                        },
+                    },
                 });
                 return cities;
             }

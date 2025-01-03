@@ -67,7 +67,10 @@ const get = async (req, res) => {
 // Patch -> /city/:id->req.body
 const update = async (req, res) => {
     try {
-        const response = await cityService.updateCity(req.params.id, req.body.name);
+        const { id } = req.params;  
+        const { name } = req.body;
+
+        const response = await cityService.updateCity(id, {name});
         return res.status(200).json({
             data: response,
             success: true,
@@ -87,7 +90,7 @@ const update = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const cities = await citySercice.getAllCities(req.query);
+        const cities = await cityService.getAllCities(req.query);
         return res.status(200).json({
             data: cities,
             err: {}
