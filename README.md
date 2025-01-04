@@ -38,3 +38,16 @@ and than execute
  ### City -> id, name, created_at, updated_at
  ### Airport -> id, name, address, city_id, created_at, updated_at
  Relationship -> City has many airports and Airport belongs to a city (one to many)
+
+### How to generate a table with given attributes
+```
+npx seqeulize model:generate
+ --name Airport 
+ --attributes name:String,address:String,cityId:integer
+```
+### How to create seeder file
+```
+npx sequelize seed:generate --name add-airports
+
+npx sequelize seed:db:seed:all
+```

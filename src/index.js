@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const CityRepository=require('./repository/city-repository')
 const Apiroutes = require('./routes/index');
 
+const db=require('./models/index')
 const setupAndStartServer = async () => {
     // create the express object
     
@@ -17,10 +18,11 @@ const setupAndStartServer = async () => {
     app.use('/api', Apiroutes);
     app.listen(PORT, () => {
         console.log(`Server stsrted st ${PORT}`);
-        // const repo = new CityRepository();
-        // repo.createCity({ name: "New Delhi" });
-        // repo.deleteCity(1)
-    })
+        
+        if (process.env.SYNC_DB) {
+            db.sequelize.sync({ alter: true });
+        }
+    });
 }
 
 setupAndStartServer();
