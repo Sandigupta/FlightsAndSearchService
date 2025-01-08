@@ -49,5 +49,5 @@ npx seqeulize model:generate
 ```
 npx sequelize seed:generate --name add-airports
 
-npx sequelize seed:db:seed:all
+npx sequelize db:seed:all
 ```

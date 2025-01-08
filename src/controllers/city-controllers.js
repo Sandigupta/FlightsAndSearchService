@@ -38,7 +38,7 @@ const destroy = async (req, res) => {
             data: {},
             success: false,
             message: 'Not able to delete the city',
-            err: error
+            err: error.message
         });
     } 
 }
