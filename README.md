@@ -1,5 +1,165 @@
 # Welcome to Flights Service
 
+# ✈️ Flights and Search Service
+
+This microservice is responsible for managing flight and airport data, including CRUD operations for cities, airports, and flight listings. It also exposes endpoints to search available flights.
+
+---
+
+## 📦 Tech Stack
+
+- **Node.js** (Express.js)
+- **Sequelize ORM**
+- **MySQL / PostgreSQL / MariaDB** (configurable)
+- **RESTful API**
+
+---
+
+## 🚀 Getting Started
+
+Follow the instructions below to set up and run the service locally.
+
+---
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Sandigupta/FlightsAndSearchService
+cd FlightsAndSearchService
+```
+
+---
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3. Environment Setup
+
+Create a `.env` file in the root directory and define the following:
+
+```env
+PORT=3000
+```
+
+> You can modify the `PORT` value based on your environment needs.
+
+---
+
+### 4. Initialize Sequelize
+
+Navigate to the project folder and run:
+
+```bash
+npx sequelize init
+```
+
+This will generate:
+- `config/config.json`
+- `models/`
+- `migrations/`
+- `seeders/`
+
+Update `config/config.json` with your local DB configuration:
+
+```json
+"development": {
+  "username": "your_db_username",
+  "password": "your_db_password",
+  "database": "your_db_name",
+  "host": "127.0.0.1",
+  "dialect": "mysql"
+}
+```
+
+---
+
+### 5. Run the Server
+
+```bash
+npm run dev
+```
+
+The server will start on `http://localhost:3000`.
+
+---
+
+## 🔁 API Endpoints
+
+Below is a list of available REST endpoints in this microservice:
+
+### 📍 Cities
+
+| Method | Endpoint           | Description                  |
+|--------|--------------------|------------------------------|
+| POST   | `/city`            | Create a new city            |
+| GET    | `/city/:id`        | Retrieve a city by ID        |
+| GET    | `/city`            | Retrieve all cities          |
+| PATCH  | `/city/:id`        | Update city by ID            |
+| DELETE | `/city/:id`        | Delete a city by ID          |
+
+---
+
+### 🛫 Airports
+
+| Method | Endpoint           | Description              |
+|--------|--------------------|--------------------------|
+| POST   | `/airport`         | Create a new airport     |
+
+---
+
+### ✈️ Flights
+
+| Method | Endpoint           | Description                        |
+|--------|--------------------|------------------------------------|
+| POST   | `/flights`         | Create a new flight *(with validation)* |
+| GET    | `/flights`         | Get all available flights          |
+
+> ✅ Flight creation uses a middleware validator: `FlightMiddleware.validateCreateFlight`
+
+---
+
+## 📬 Feedback & Contributions
+
+- Found a bug? Please [open an issue](https://github.com/Sandigupta/FlightsAndSearchService/issues)
+- Want to contribute? [Submit a pull request](https://github.com/Sandigupta/FlightsAndSearchService/pulls)
+
+---
+
+## 🧠 Author
+
+Built and maintained by [Sandeep Gupta](https://github.com/Sandigupta) with ❤️
+
+---
+
+## 🔗 Related Microservices
+
+- 🛡 [Authentication Service](https://github.com/Sandigupta/authentication_service-)
+- 🌐 [API Gateway](https://github.com/Sandigupta/API_GATEWAYS-)
+- ⏰ [Reminder Service](https://github.com/Sandigupta/REMINDER_SERVICE)
+- 🧾 [Booking Service](https://github.com/your-booking-service-link)
+  
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
 ## Project Setup
 - clone the project on your local 
 - Execute `npm install` on the same path as of your root directory of the downloaded project
